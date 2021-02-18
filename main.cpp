@@ -10,8 +10,10 @@ int main()
 {
     int cash = 1000;    // the amount of money you have to invest
     int choice;
-
-    // variable initializations
+    int leftoverCash;
+    // Initialize random percent variable and seed random function
+    int randomPercent;
+    srand(time(NULL));
     // include numbers of stocks for four companies (ints)
     int numGme = 0;
     int numAmc = 0;
@@ -22,6 +24,7 @@ int main()
     int amcPrice = 50;
     int aphaPrice = 60;
     int aaplPrice = 200;
+
 
     // Build a portfolio
     cout << "Welcome to the stock market" << endl << endl;
@@ -85,7 +88,7 @@ int main()
             default: {}
         }
         // while the input is invalid
-        while (!(choice >= 1 && choice <= 4))
+        while (!((choice >= 1 && choice <= 4) || choice == QUIT))
         {
             //Error Message
             cout << "Sorry! Your input was invalid." << endl;
@@ -97,9 +100,11 @@ int main()
             cout << "3. Aphria Cannabis ($APHA): $" << aphaPrice << " per share" << endl;
             cout << "4. Apple ($AAPL): $" << aaplPrice << " per share" << endl;
             cout << "5. Quit buying stocks" << endl;
-            cin >> choice;
 
             //Get choice
+            cin >> choice;
+
+            //Manage choice
             switch(choice){
                 case 1:
                     if(cash >= gmePrice){
@@ -145,26 +150,43 @@ int main()
             }
         }
 
-        // purchase a share of the appropriate stock
-
     } while (cash > 0 && choice != QUIT);
 
-    cout << "You have left the trading business with $" << cash << endl;
+    leftoverCash = cash;
 
-    cout << "\n\nThis is your portfolio: " << endl;
+    //Print current portfolio
+    cout << "You're all done buying stocks! Here is your current portfolio: " << endl << endl;
+    cout << "You own: " << numGme << " shares of GameStop." << endl;
+    cout << "You own: " << numAmc << " shares of AMC." << endl;
+    cout << "You own: " << numApha << " shares of Aphria." << endl;
+    cout << "You own: " << numAapl << " shares of Apple." << endl;
+    cout << "You have: $" << leftoverCash << " leftover after buying stocks." << endl << endl;
 
-    // Now simulate staying in the market for 3 years
-    // first, seed the random number generator so it is different every run
-    // srandom(time(NULL));   // leave this commented out so you can reproduce your runs
-
-    //for loop over the 3 years
+    //Simulate stock changes
+    for(int i = 1; i < 4; i++)
     {
-        //calculate percent gain for each stock
-        //use random() to generate a number between 0...30, subtract 10 to set gain to -10...+20
+        randomPercent = (rand() % 31) - 10;
+        gmePrice *= ((randomPercent / 100.0) + 1);
 
-        //Now print out full portfolio
+        randomPercent = (rand() % 31) - 10;
+        amcPrice *= ((randomPercent / 100.0) + 1);
 
+        randomPercent = (rand() % 31) - 10;
+        aphaPrice *= ((randomPercent / 100.0) + 1);
+
+        randomPercent = (rand() % 31) - 10;
+        aaplPrice *= ((randomPercent / 100.0) + 1);
+
+        cout << "After year: " << i << " you own " << numGme << " shares of GameStop at $" << gmePrice << " per share." << endl;
+        cout << "After year: " << i << " you own " << numAmc << " shares of AMC at $" << amcPrice << " per share." << endl;
+        cout << "After year: " << i << " you own " << numApha << " shares of Aphria at $" << aphaPrice << " per share." << endl;
+        cout << "After year: " << i << " you own " << numAapl << " shares of Apple at $" << aaplPrice << " per share." << endl;
+
+        cash = leftoverCash + (numGme * gmePrice) + (numAmc * amcPrice) + (numApha * aphaPrice) + (numAapl * aaplPrice);
+        cout << "After year: " << i << " your net worth is: $" << cash << endl << endl;
     }
+
+    cout << "You have left the trading business with $" << cash << endl;
 
     return 0;
 }
