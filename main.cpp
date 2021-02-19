@@ -91,63 +91,7 @@ int main()
         while (!((choice >= 1 && choice <= 4) || choice == QUIT))
         {
             //Error Message
-            cout << "Sorry! Your input was invalid." << endl;
-
-            //Print Menu
-            cout << "Stock options (Enter number 1 - 4 to select):" << endl;
-            cout << "1. GameStop ($GME): $" << gmePrice << " per share." << endl;
-            cout << "2. AMC ($AMC): $" << amcPrice << " per share" << endl;
-            cout << "3. Aphria Cannabis ($APHA): $" << aphaPrice << " per share" << endl;
-            cout << "4. Apple ($AAPL): $" << aaplPrice << " per share" << endl;
-            cout << "5. Quit buying stocks" << endl;
-
-            //Get choice
-            cin >> choice;
-
-            //Manage choice
-            switch(choice){
-                case 1:
-                    if(cash >= gmePrice){
-                        cash -= gmePrice;
-                        numGme++;
-                        cout << "You have: $" << cash << " remaining." << endl;
-                        cout << "You now have: " << numGme << " shares of GameStop!" << endl << endl;
-                    }
-                    else
-                        cout << "Sorry! You don't have enough money." << endl << endl;
-                    break;
-                case 2:
-                    if(cash >= amcPrice){
-                        cash -= amcPrice;
-                        numAmc++;
-                        cout << "You have: $" << cash << " remaining." << endl;
-                        cout << "You now have: " << numAmc << " shares of AMC!" << endl << endl;
-                    }
-                    else
-                        cout << "Sorry! You don't have enough money." << endl << endl;
-                    break;
-                case 3:
-                    if(cash >= aphaPrice){
-                        cash -= aphaPrice;
-                        numApha++;
-                        cout << "You have: $" << cash << " remaining." << endl;
-                        cout << "You now have: " << numApha << " shares of Aphria!" << endl << endl;
-                    }
-                    else
-                        cout << "Sorry! You don't have enough money." << endl << endl;
-                    break;
-                case 4:
-                    if(cash >= aaplPrice){
-                        cash -= aaplPrice;
-                        numAapl++;
-                        cout << "You have: $" << cash << " remaining." << endl;
-                        cout << "You now have: " << numAapl << " shares of Apple!" << endl << endl;
-                    }
-                    else
-                        cout << "Sorry! You don't have enough money." << endl << endl;
-                    break;
-                default: {}
-            }
+            cout << "Sorry! Your input was invalid." << endl; break;
         }
 
     } while (cash > 0 && choice != QUIT);
